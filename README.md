@@ -8,6 +8,11 @@ QuickRec is a web-based platform that allows employees to generate a recommendat
 - **Email Integration:** Sends the letter to the supervisor for approval using EmailJS.
 - **Tailwind CSS:** Fully styled with Tailwind CSS for a responsive and modern UI.
 
+![image](https://github.com/user-attachments/assets/1836e1b3-f6b3-43dd-b721-3d8a4bd1ea29)
+![image](https://github.com/user-attachments/assets/922ec3c2-bbcb-4949-8a51-470df4f8a631)
+![image](https://github.com/user-attachments/assets/7634abe5-2112-4303-ba4c-46db1c7c99f7)
+
+
 ## 🛠️ Technologies Used
 - **HTML** for structure
 - **Tailwind CSS** for styling
