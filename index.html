@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickRec - Recommendation Letter Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+    <div class="container mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+        <h1 class="text-3xl font-bold mb-4 text-center">QuickRec - Write Your Recommendation Letter</h1>
+
+        <div id="employee-section">
+            <h2 class="text-xl font-semibold mb-2">Your Details</h2>
+            <form id="employeeForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium">Your Full Name</label>
+                    <input type="text" id="employeeName" class="w-full px-3 py-2 border rounded-md" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium">Job Role</label>
+                    <input type="text" id="jobRole" class="w-full px-3 py-2 border rounded-md" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium">Key Achievements (to include in the letter)</label>
+                    <textarea id="achievements" class="w-full px-3 py-2 border rounded-md" rows="4" required></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium">Supervisor's Full Name</label>
+                    <input type="text" id="supervisorName" class="w-full px-3 py-2 border rounded-md" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium">Supervisor's Email</label>
+                    <input type="email" id="supervisorEmail" class="w-full px-3 py-2 border rounded-md" required>
+                </div>
+                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md">Generate & Send for Approval</button>
+            </form>
+        </div>
+
+        <div id="confirmation-section" class="hidden mt-6 text-center">
+            <h2 class="text-xl font-semibold mb-2 text-green-600">Letter Sent for Approval!</h2>
+            <p>Your recommendation letter has been sent to your supervisor for approval.</p>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("YOUR_PUBLIC_API_CODE");
+        })();
+    </script>
+    <script>
+        document.getElementById('employeeForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+        
+            const employeeName = document.getElementById('employeeName').value;
+            const jobRole = document.getElementById('jobRole').value;
+            const achievements = document.getElementById('achievements').value;
+            const supervisorName = document.getElementById('supervisorName').value;
+            const supervisorEmail = document.getElementById('supervisorEmail').value;
+        
+            const letterContent = `To Whom It May Concern,\n\nIt is my pleasure to recommend ${employeeName} for their exceptional performance in the role of ${jobRole}. During their time at our company, ${employeeName} has made significant contributions, including:\n\n${achievements}\n\n${employeeName} has demonstrated dedication, skill, and a positive impact on our projects. I am confident that they will continue to excel in any endeavor they pursue.\n\nSincerely,\n${supervisorName}`;
+        
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                to_name: supervisorName,
+                to_email: supervisorEmail,
+                employee_name: employeeName,
+                job_role: jobRole,
+                letter_content: letterContent
+            }).then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+                document.getElementById('employee-section').classList.add('hidden');
+                document.getElementById('confirmation-section').classList.remove('hidden');
+            }, (error) => {
+                console.log('FAILED...', error);
+                alert("Failed to send the letter. Please try again.");
+            });
+        });
+    </script>
+</body>
+</html>
