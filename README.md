@@ -23,7 +23,7 @@ Before you begin, ensure you have met the following requirements:
 ## 📦 Setup & Installation
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/quickrec.git
+   git clone https://github.com/Gabriel-Dalton/quickrec.git
    ```
 2. **Navigate to the project folder:**
    ```bash
